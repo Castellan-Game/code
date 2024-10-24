@@ -4,7 +4,6 @@ import random
 import time
 from pygame.locals import *
 
-import numpy as np
 
 
 from pygame.sprite import Group
