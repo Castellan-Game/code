@@ -24,14 +24,15 @@ body{
 
 nav{
     width: 100%;
-    height: 40px;
+    height: 60px;
     padding: 10px;
     font-size: 17px;
 }
 
 nav ul{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 10px;
@@ -43,6 +44,11 @@ nav li{
     text-align: center;
     flex: 1;
     padding-top: 10px;
+}
+
+#logo{
+    display: inline;
+    margin-bottom: 10px;
 }
 
 a{
@@ -65,6 +71,7 @@ a{
     position: relative;
     width: 100%;
     max-width: 400px;
+    flex: 1;
 }
 
 .jogar{
@@ -101,27 +108,28 @@ a{
 
 div.gallery {
     border: 1px solid #ccc;
-    justify-content: center;
+    align-items: center;
 }
 
 div.gallery:hover {
     border: 10px solid #27301b;
 }
 
-div.gallery img {
-    width: 100%;
-    max-width: 600px;
+.gallery img {
+    max-width: 100%;
     height: auto;
+    display: block;
     align-items: center;
+    justify-self: center;
 }
 
 .responsive {
-    padding: 0 6px;
-    float: left;
+    padding: 6px;
+    justify-content: center;
+    align-items: center;
     width: 50.99999%;
     height: 50.99999%;
     margin-top: 10px;
-    justify-items: center;
 }
 
 @media only screen and (max-width: 700px) {
