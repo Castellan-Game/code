@@ -5,7 +5,6 @@ import time
 from pygame.locals import *
 
 
-
 from pygame.sprite import Group
 
 # Inicialização do Pygame
@@ -20,6 +19,7 @@ pygame.display.set_caption("Castellan")
 WHITE = (255, 255, 255)
 DOOR_COLOR = (0, 255, 0)  # Cor da porta (verde)
 
+vel = 1
 
 class CastellanMove(pygame.sprite.Sprite):
     def __init__(self):
@@ -57,7 +57,7 @@ class CastellanMove(pygame.sprite.Sprite):
 
     def update(self):
         if self.andard == True:
-            self.rect.x += 18
+            self.rect.x += 18 * vel
             self.atual = self.atual + 0.8
             if self.atual >= len(self.spritesd):
                 self.atual = 0
@@ -76,6 +76,9 @@ class CastellanMove(pygame.sprite.Sprite):
     def resetchar2(self):
         self.rect.x = 100
         self.rect.y = 640
+    def resetcharTuto(self):
+        self.rect.x = 100
+        self.rect.y = 610
 
     def movetofar(self):
         self.rect.x = 2000
@@ -114,22 +117,22 @@ letter_rect.x = 500
 letter_rect.y = HEIGHT - 725
 # variáveis de estado
 
-#porta abrir para liberar a próxima fase (por enquanto não funciona)
+# porta abrir para liberar a próxima fase (por enquanto não funciona)
 door_open = False
 door_open2 = False
-#transição - carta
+# transição - carta
 opacidade = 0
 aumentando_opacidade = False
 
-#andar
+# andar
 isWing = False
 
-#carta necessária pra primeirafase:
+# carta necessária pra primeirafase:
 lettersaw = False
 # porta
 door_rect = pygame.Rect(1350, 650, 90, 160)  # Definindo a porta
 
-#projeto da terceira fase
+# projeto da terceira fase
 obstacle_image = pygame.image.load('./imgs/arvore].png')
 obstacle_image = pygame.transform.scale(obstacle_image, [50, 100])
 obstacles = []
@@ -137,6 +140,8 @@ obstacle_speed = 5
 
 # Funções
 
+def resetD(resetar):
+    resetar = False
 
 def opacity(aumentar_opacidade, opacidade, imagem, posimage):
     # Aumenta a opacidade se estiver no modo de transição
@@ -177,7 +182,7 @@ def draw_text(text, size, color, surface, x, y):
 
 # necessário pra repetição da imagem -> segunda fase
 secondphaseimage = pygame.image.load('./imgs/pagsix.jpg')
-secondphaseimageimage = pygame.transform.scale(secondphaseimage, (700, 800))
+secondphaseimage = pygame.transform.scale(secondphaseimage, (1440, 810))
 
 
 def show_image(image_path):
@@ -238,20 +243,14 @@ def verificar_input(texto, a):
         return 1
 
 
-def game_pages():
-    page_images = [
-        './imgs/pagone.jpg',
-        './imgs/pagtwo.jpg',
-        './imgs/pagthree.jpg',
-        './imgs/pagfour.jpg',
-        './imgs/pagfive.jpg',
-        './imgs/pagsix.jpg',
+def secondgamepage():
+    page2images = [
         './imgs/pagseven.jpg',
-        './imgs/pageight.jpg'
+        
     ]
 
     i = 0
-    while i < 7:
+    while i < 1:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -270,27 +269,61 @@ def game_pages():
                         if verposicao(mousepos, 70, 650, 130, 100) == 1:
                             i -= 1
 
-            if i == 7:
+            if i == 1:
                 break
             screen.fill(WHITE)
-            show_image(page_images[i])
+            show_image(page2images[i])
             pygame.display.flip()
 
     first_level()
 
 
-def first_level():
-    castellanm.resetchar2()
-    global door_open
+def game_pages():
+    page_images = [
+        './imgs/pagone.jpg',
+        './imgs/pagtwo.jpg',
+        './imgs/pagthree.jpg',
+        './imgs/pagfour.jpg',
+        './imgs/pagfive.jpg',
+
+    ]
+
+    i = 0
+    while i < 4:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 1260, 650, 130, 100) == 1:
+                        i += 1
+
+                if i >= 1:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        mousepos = pygame.mouse.get_pos()
+                        print(mousepos)
+                        if verposicao(mousepos, 70, 650, 130, 100) == 1:
+                            i -= 1
+
+            if i == 5:
+                break
+            screen.fill(WHITE)
+            show_image(page_images[i])
+            pygame.display.flip()
+
+    tutorial_introduction()
+
+
+def tutorial_introduction():
+    castellanm.resetcharTuto()
+
     global isWing
-    answer = random.randint(1, 10) + random.randint(1, 10)
-    user_input = ""
-    user_input = user_input.lower()
-    input_timer = time.time()
-    lettersaw = 0
+    isWing = False
     global aumentando_opacidade
     global opacidade
-    teclas_presse = []
 
     while True:
         for event in pygame.event.get():
@@ -300,6 +333,62 @@ def first_level():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == K_d:
+                    isWing = True
+                    print('vc apertou')
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_d:
+                    isWing = False
+                    print('vc soltou')
+
+            if isWing == True:
+                print('w')
+                print('to apertando')
+
+                castellanm.andardireita()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mousepos = pygame.mouse.get_pos()
+                print(mousepos)
+
+            
+        screen.fill(WHITE)
+        show_image('./imgs/pagsix.jpg')
+
+        movementocastellan.draw(screen)
+        movementocastellan.update()
+        pygame.display.flip()
+
+        pygame.time.delay(30)
+        if castellanm.atualpos() >= 1000:
+
+            break
+        
+    secondgamepage()
+
+
+def first_level():
+    
+    global door_open
+    global isWing
+    isWing = False
+    answer = random.randint(1, 10) + random.randint(1, 10)
+    user_input = ""
+    user_input = user_input.lower()
+    input_timer = time.time()
+    lettersaw = 0
+    global aumentando_opacidade
+    global opacidade
+    teclas_presse = []
+    
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_d:
                     isWing = True
                     print('vc apertou')
             elif event.type == pygame.KEYUP:
@@ -333,9 +422,10 @@ def first_level():
                     door_open == True
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                print(isWing)
                 mousepos = pygame.mouse.get_pos()
                 print(mousepos)
-                if verposicao(mousepos, 575, 450, 600, 300) == 1:
+                if verposicao(mousepos, 1080, 510, 70, 62) == 1:
                     openlettero = 1
                     if openlettero == 1:
                         lettersaw = 1
@@ -352,7 +442,7 @@ def first_level():
             input_timer = time.time()
 
         screen.fill(WHITE)
-        show_image('./imgs/firstfasepage.jpg')
+        show_image('./imgs/pageight.jpg')
 
         if lettersaw == 1:
             letter_image.set_alpha(opacidade)
@@ -376,18 +466,17 @@ def first_level():
 
         letter_image.set_alpha(opacidade)
 
-        # Desenha a imagem com a opacidade ajustada
+        
 
-        # Desenha a porta
-        pygame.draw.rect(screen, DOOR_COLOR, door_rect)
+        
 
-        movementocastellan.draw(screen)
-        movementocastellan.update()
+       
+    
         pygame.display.flip()
 
         pygame.time.delay(30)
-        if castellanm.atualpos() >= 1350 and door_open == True :
-
+        if door_open == True:
+            
             break
 
     second_level()
@@ -399,6 +488,9 @@ def second_level():
     opacidadesecond = 255
     global door_open2
     global isWing
+    global vel
+    vel = 0.5
+    isWing = False
     user_input = ""
     input_timer = time.time()
     door_open = False
@@ -411,7 +503,7 @@ def second_level():
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == K_d:
+                if event.key == pygame.K_d:
                     isWing = True
                     print('vc apertou')
             elif event.type == pygame.KEYUP:
@@ -461,7 +553,7 @@ def second_level():
 
         screen.set_alpha(opacidadesecond)
 
-        pygame.draw.rect(screen, DOOR_COLOR, door_rect)
+       
 
         movementocastellan.draw(screen)
         movementocastellan.update()
