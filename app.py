@@ -306,12 +306,12 @@ def main_menu():
                 opacidademenu += 1
                 print("ta rodando")
                 screen.set_alpha(opacidademenu)
-                pygame.time.delay(15)
+                pygame.time.delay(9)
             elif opacidademenu > 100 and opacidademenu < 255:
                 opacidademenu += 1.5
                 print("ta rodando")
                 screen.set_alpha(opacidademenu)
-                pygame.time.delay(15)
+                pygame.time.delay(7)
         
             else:
                 show_image('./imgs/menuc.jpg')
@@ -669,10 +669,10 @@ def first_level():
             letter1_image.set_alpha(opacidade)
             screen.blit(letter1_image, letter_rect)
             if opacidade < 255:
-                opacidade += 5
+                opacidade += 15
                 print("ta rodando")
 
-                pygame.time.delay(15)
+                pygame.time.delay(5)
 
         letter1_image.set_alpha(opacidade)
 
@@ -683,7 +683,7 @@ def first_level():
                 opacidade -= 15
                 print("ta rodando")
 
-                pygame.time.delay(15)
+                pygame.time.delay(2)
             if opacidade == 0:
                 lettersaw = 0
         
@@ -696,10 +696,10 @@ def first_level():
             letter2_image.set_alpha(opacidade2)
             screen.blit(letter2_image, letter2_rect)
             if opacidade2 < 255:
-                opacidade2 += 5
+                opacidade2 += 15
                 print("ta rodando")
             
-                pygame.time.delay(15)
+                pygame.time.delay(5)
 
         letter2_image.set_alpha(opacidade2)
 
@@ -710,7 +710,7 @@ def first_level():
                 opacidade2 -= 15
                 print("ta rodando")
 
-                pygame.time.delay(15)
+                pygame.time.delay(2)
             if opacidade2 == 0:
                 letter2saw = 0
 
@@ -722,10 +722,10 @@ def first_level():
             letter3_image.set_alpha(opacidade3)
             screen.blit(letter3_image, letter3_rect)
             if opacidade3 < 255:
-                opacidade3 += 5
+                opacidade3 += 15
                 print("ta rodando")
             
-                pygame.time.delay(15)
+                pygame.time.delay(5)
 
         letter3_image.set_alpha(opacidade3)
 
@@ -736,7 +736,7 @@ def first_level():
                 opacidade3 -= 15
                 print("ta rodando")
 
-                pygame.time.delay(15)
+                pygame.time.delay(2)
             if opacidade3 == 0:
                 letter3saw = 0
 
@@ -867,7 +867,7 @@ def second_level():
                 opacidadeMaiorMapa += 5
                 print("ta rodando")
             
-                pygame.time.delay(15)
+                pygame.time.delay(4)
 
         maiormapaimage.set_alpha(opacidadeMaiorMapa)
 
@@ -878,7 +878,7 @@ def second_level():
                 opacidadeMaiorMapa -= 5
                 print("ta rodando")
                 
-                pygame.time.delay(15)
+                pygame.time.delay(4)
             if opacidadeMaiorMapa == 0:
                 mapa2saw = 0
 
@@ -891,7 +891,7 @@ def second_level():
                 opacidadeMenorMapa -= 5
                 print("ta rodando")
 
-                pygame.time.delay(15)
+                pygame.time.delay(4)
             if opacidadeMenorMapa == 0:
                 mapasaw = 3
 
@@ -904,7 +904,7 @@ def second_level():
                 opacidadeMaiorMapa -= 5
                 print("ta rodando")
                 
-                pygame.time.delay(15)
+                pygame.time.delay(4)
             if opacidadeMaiorMapa == 0:
                 mapa2saw = 3
                 level_up()
