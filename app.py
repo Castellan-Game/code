@@ -107,14 +107,31 @@ gravity = 2.8
 y_velocity = 0
 
 
-# configs da carta / livro ( OBS : Somente ilustração )
-letter_image = pygame.image.load('./imgs/fullletterimg.jpg')
-letter_image = pygame.transform.scale(letter_image, [360, 640])
+# configs das cartas / livro 
+letter1_image = pygame.image.load('./imgs/carta1.png')
+letter1_image = pygame.transform.scale(letter1_image, [480, 640])
 
-letter_rect = letter_image.get_rect()
+letter_rect = letter1_image.get_rect()
 
 letter_rect.x = 500
 letter_rect.y = HEIGHT - 725
+
+letter2_image = pygame.image.load('./imgs/carta2.png')
+letter2_image = pygame.transform.scale(letter2_image, [480, 640])
+
+letter2_rect = letter2_image.get_rect()
+
+letter2_rect.x = 500
+letter2_rect.y = HEIGHT - 725
+
+
+letter3_image = pygame.image.load('./imgs/carta3.png')
+letter3_image = pygame.transform.scale(letter3_image, [480, 640])
+
+letter3_rect = letter3_image.get_rect()
+
+letter3_rect.x = 500
+letter3_rect.y = HEIGHT - 725
 # variáveis de estado
 
 # porta abrir para liberar a próxima fase (por enquanto não funciona)
@@ -123,7 +140,8 @@ door_open2 = False
 # transição - carta
 opacidade = 0
 aumentando_opacidade = False
-
+opacidade2 = 0
+opacidade3 = 0
 # andar
 isWing = False
 
@@ -164,7 +182,7 @@ def openletter():
                 pygame.quit()
                 sys.exit()
 
-        screen.blit(letter_image, [500, 725])
+        screen.blit(letter1_image, [500, 725])
 
 
 def verposicao(mouse, x, y, w, h):
@@ -259,7 +277,7 @@ def secondgamepage():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mousepos = pygame.mouse.get_pos()
                     print(mousepos)
-                    if verposicao(mousepos, 1260, 650, 130, 100) == 1:
+                    if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
                         i += 1
 
                 if i >= 1:
@@ -380,8 +398,12 @@ def first_level():
     user_input = user_input.lower()
     input_timer = time.time()
     lettersaw = 0
+    letter2saw = 0
+    letter3saw = 0
     global aumentando_opacidade
     global opacidade
+    global opacidade2
+    global opacidade3
     teclas_presse = []
     
 
@@ -433,9 +455,35 @@ def first_level():
                     openlettero = 1
                     if openlettero == 1:
                         lettersaw = 1
-                if lettersaw == True:
-                    if verposicao(mousepos, 780, 103, 60, 45) == 1:
+                if lettersaw == 1:
+                    if verposicao(mousepos, 923, 105, 32, 28) == 1 and opacidade > 150:
                         lettersaw = 2
+                    if verposicao(mousepos, 584, 272, 310, 59) == 1:
+                        lettersaw = 2
+                        
+                        letter2saw = 1
+
+                if letter2saw == 1:
+                    letter3saw = 0
+                    if verposicao(mousepos, 923, 105, 32, 28) == 1 and opacidade2>150:
+                        letter2saw = 2
+                    if verposicao(mousepos, 584, 473, 310, 59) == 1:
+                        letter2saw = 2
+                        
+                        letter3saw = 1
+
+                if letter3saw == 1:
+                    if verposicao(mousepos, 923, 105, 32, 28) == 1:
+                        letter3saw = 2
+                    if verposicao(mousepos, 584, 272, 310, 59) == 1:
+                        door_open = True
+                   
+                    
+                        
+                        
+
+        
+
 
         # Movimentação do personagem(Sem uso até então)
         keys = pygame.key.get_pressed()
@@ -449,28 +497,83 @@ def first_level():
         show_image('./imgs/cast7.jpg')
 
         if lettersaw == 1:
-            letter_image.set_alpha(opacidade)
-            screen.blit(letter_image, letter_rect)
+            letter1_image.set_alpha(opacidade)
+            screen.blit(letter1_image, letter_rect)
             if opacidade < 255:
                 opacidade += 5
                 print("ta rodando")
 
                 pygame.time.delay(20)
 
-        letter_image.set_alpha(opacidade)
+        letter1_image.set_alpha(opacidade)
 
         if lettersaw == 2:
-            letter_image.set_alpha(opacidade)
-            screen.blit(letter_image, letter_rect)
+            letter1_image.set_alpha(opacidade)
+            screen.blit(letter1_image, letter_rect)
             if opacidade > 0:
-                opacidade -= 5
+                opacidade -= 8
                 print("ta rodando")
 
                 pygame.time.delay(20)
-
-        letter_image.set_alpha(opacidade)
-
+            if opacidade == 0:
+                lettersaw = 0
         
+
+        letter1_image.set_alpha(opacidade)
+
+
+
+        if letter2saw == 1:
+            letter2_image.set_alpha(opacidade2)
+            screen.blit(letter2_image, letter2_rect)
+            if opacidade2 < 255:
+                opacidade2 += 8
+                print("ta rodando")
+            
+                pygame.time.delay(20)
+
+        letter2_image.set_alpha(opacidade2)
+
+        if letter2saw == 2:
+            letter2_image.set_alpha(opacidade2)
+            screen.blit(letter2_image, letter2_rect)
+            if opacidade2 > 0:
+                opacidade2 -= 8
+                print("ta rodando")
+
+                pygame.time.delay(20)
+            if opacidade2 == 0:
+                letter2saw = 0
+
+        letter2_image.set_alpha(opacidade2)
+
+
+
+        if letter3saw == 1:
+            letter3_image.set_alpha(opacidade3)
+            screen.blit(letter3_image, letter3_rect)
+            if opacidade3 < 255:
+                opacidade3 += 8
+                print("ta rodando")
+            
+                pygame.time.delay(20)
+
+        letter3_image.set_alpha(opacidade3)
+
+        if letter3saw == 2:
+            letter3_image.set_alpha(opacidade3)
+            screen.blit(letter3_image, letter3_rect)
+            if opacidade3 > 0:
+                opacidade3 -= 8
+                print("ta rodando")
+
+                pygame.time.delay(20)
+            if opacidade3 == 0:
+                letter3saw = 0
+
+        letter3_image.set_alpha(opacidade3)
+
+
 
         
 
