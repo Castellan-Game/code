@@ -194,7 +194,7 @@ def resetD(resetar):
 def opacity(aumentar_opacidade, opacidade, imagem, posimage):
     # Aumenta a opacidade se estiver no modo de transição
     if aumentar_opacidade and opacidade < 255:
-        opacidade += 5  # Aumenta a opacidade gradualmente
+        opacidade += 2  # Aumenta a opacidade gradualmente
     elif opacidade >= 255:
         aumentar_opacidade = False  # Para de aumentar ao atingir opacidade máxima
 
@@ -367,11 +367,11 @@ def secondgamepage():
 
 def game_pages():
     page_images = [
-        './imgs/firstwtext.jpg',
-        './imgs/firsttext.jpg',
+        './imgs/cast1.png',
+        './imgs/cast1.2.png',
         './imgs/cast2.jpg',
-        './imgs/cast3.jpg',
-        './imgs/cast3.1.jpg',
+        './imgs/cast3.png',
+        './imgs/castsotao.png',
         './imgs/cast4.jpg',
         './imgs/cast4.1.jpg',
         './imgs/cast5.jpg',
@@ -410,13 +410,15 @@ def game_pages():
 def castlepages():
     
     castle_images = [
-        './imgs/castle.png',
-        './imgs/castlewgirl.png',
+        './imgs/castelo.png',
+        './imgs/fase2.png',
+        './imgs/fase21.png',
+        './imgs/fase22.png',
         
 
     ]
     i = 0
-    while i < 2:
+    while i < 4:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -435,7 +437,7 @@ def castlepages():
                         if verposicao(mousepos, 70, 650, 130, 100) == 1:
                             i -= 1
 
-            if i == 2:
+            if i == 4:
                 break
             screen.fill(WHITE)
             show_image(castle_images[i])
@@ -827,7 +829,7 @@ def second_level():
 
         screen.fill(WHITE)
        
-        show_image('./imgs/secondphaseimg.png')
+        show_image('./imgs/mapaimg.png')
 
 
 
