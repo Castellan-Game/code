@@ -16,10 +16,17 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Castellan")
 
 # Cores
+BLACK = (0,0,0)
 WHITE = (255, 255, 255)
 DOOR_COLOR = (0, 255, 0)  # Cor da porta (verde)
 
 vel = 1
+
+vezes = 0
+#music
+pygame.mixer.music.load("./audio/intro.mp3")
+pygame.mixer.music.set_volume(0.08)
+pygame.mixer.music.play(-1)
 
 class CastellanMove(pygame.sprite.Sprite):
     def __init__(self):
@@ -202,6 +209,8 @@ def draw_text(text, size, color, surface, x, y):
 secondphaseimage = pygame.image.load('./imgs/pagsix.jpg')
 secondphaseimage = pygame.transform.scale(secondphaseimage, (1440, 810))
 
+menucimage = pygame.image.load('./imgs/menuc.jpg')
+menucimage = pygame.transform.scale(menucimage, (1440, 810))
 
 def show_image(image_path):
     image = pygame.image.load(image_path)
@@ -210,6 +219,8 @@ def show_image(image_path):
 
 
 def creds():
+    global vezes
+    vezes = vezes + 1
     while True:
 
         for event in pygame.event.get():
@@ -219,8 +230,10 @@ def creds():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousepos = pygame.mouse.get_pos()
                 print(mousepos)
+                print(vezes)
                 if verposicao(mousepos, 73, 620, 130, 100) == 1:
                     main_menu()
+                    
 
         screen.fill(WHITE)  # Cor de fundo
         show_image('./imgs/credsimg.jpg')  # Imagem de fundo do menu
@@ -229,7 +242,17 @@ def creds():
 
 
 def main_menu():
+    opacidademenu = 0
+    global vezes
+
+
+    if vezes == 0:
+        pygame.time.delay(800)
     while True:
+
+        
+        
+       
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -247,9 +270,30 @@ def main_menu():
                     game_pages()
                 elif verposicao(mousepos, 73, 626, 130, 100) == 1:
                     creds()
+                    vezes = vezes + 1
 
-        screen.fill(WHITE)  # Cor de fundo
-        show_image('./imgs/menuC.jpg')  # Imagem de fundo do menu
+        screen.fill(BLACK)  # Cor de fundo
+
+        if vezes == 0:
+            menucimage.set_alpha(opacidademenu)
+            screen.blit(menucimage, (0, 0))
+            if opacidademenu <= 100 :
+                opacidademenu += 1
+                print("ta rodando")
+                screen.set_alpha(opacidademenu)
+                pygame.time.delay(15)
+            elif opacidademenu > 100 and opacidademenu < 255:
+                opacidademenu += 1.5
+                print("ta rodando")
+                screen.set_alpha(opacidademenu)
+                pygame.time.delay(15)
+        
+            else:
+                show_image('./imgs/menuc.jpg')
+
+            screen.set_alpha(opacidademenu)
+        else:
+            show_image('./imgs/menuc.jpg')
 
         pygame.display.flip()
 
@@ -451,7 +495,7 @@ def first_level():
                 print(isWing)
                 mousepos = pygame.mouse.get_pos()
                 print(mousepos)
-                if verposicao(mousepos, 660, 484, 67, 72) == 1:
+                if verposicao(mousepos, 1141, 204, 80, 55) == 1:
                     openlettero = 1
                     if openlettero == 1:
                         lettersaw = 1
@@ -494,7 +538,7 @@ def first_level():
             input_timer = time.time()
 
         screen.fill(WHITE)
-        show_image('./imgs/cast7.jpg')
+        show_image('./imgs/cast7.png')
 
         if lettersaw == 1:
             letter1_image.set_alpha(opacidade)
@@ -503,7 +547,7 @@ def first_level():
                 opacidade += 5
                 print("ta rodando")
 
-                pygame.time.delay(20)
+                pygame.time.delay(15)
 
         letter1_image.set_alpha(opacidade)
 
@@ -514,7 +558,7 @@ def first_level():
                 opacidade -= 8
                 print("ta rodando")
 
-                pygame.time.delay(20)
+                pygame.time.delay(15)
             if opacidade == 0:
                 lettersaw = 0
         
@@ -530,7 +574,7 @@ def first_level():
                 opacidade2 += 8
                 print("ta rodando")
             
-                pygame.time.delay(20)
+                pygame.time.delay(15)
 
         letter2_image.set_alpha(opacidade2)
 
@@ -541,7 +585,7 @@ def first_level():
                 opacidade2 -= 8
                 print("ta rodando")
 
-                pygame.time.delay(20)
+                pygame.time.delay(15)
             if opacidade2 == 0:
                 letter2saw = 0
 
@@ -556,7 +600,7 @@ def first_level():
                 opacidade3 += 8
                 print("ta rodando")
             
-                pygame.time.delay(20)
+                pygame.time.delay(15)
 
         letter3_image.set_alpha(opacidade3)
 
@@ -567,7 +611,7 @@ def first_level():
                 opacidade3 -= 8
                 print("ta rodando")
 
-                pygame.time.delay(20)
+                pygame.time.delay(15)
             if opacidade3 == 0:
                 letter3saw = 0
 
