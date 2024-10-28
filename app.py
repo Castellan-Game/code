@@ -267,7 +267,9 @@ def main_menu():
                 mousepos = pygame.mouse.get_pos()
                 print(mousepos)
                 if verposicao(mousepos, 575, 450, 300, 100) == 1:
+                    vezes = vezes + 1
                     game_pages()
+                    
                 elif verposicao(mousepos, 73, 626, 130, 100) == 1:
                     creds()
                     vezes = vezes + 1
@@ -336,7 +338,7 @@ def secondgamepage():
             screen.fill(WHITE)
             show_image(page2images[i])
             pygame.display.flip()
-
+    vezes = + 1
     first_level()
 
 
@@ -381,6 +383,72 @@ def game_pages():
             pygame.display.flip()
 
     tutorial_introduction()
+
+def castlepages():
+    
+    castle_images = [
+        './imgs/castle.png',
+        './imgs/castlewgirl.png',
+        
+
+    ]
+    i = 0
+    while i < 2:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 0,0,WIDTH,HEIGHT) == 1:
+                        i += 1
+
+                if i >= 1:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        mousepos = pygame.mouse.get_pos()
+                        print(mousepos)
+                        if verposicao(mousepos, 70, 650, 130, 100) == 1:
+                            i -= 1
+
+            if i == 2:
+                break
+            screen.fill(WHITE)
+            show_image(castle_images[i])
+            pygame.display.flip()
+
+    second_level()
+
+
+def level_up():
+    levelupimages = [
+        './imgs/levelup.png'
+        
+
+    ]
+
+    i = 0
+    while i < 1:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 225, 237, 317, 317) == 1:
+                        i += 1
+
+               
+            if i == 1:
+                break
+            screen.fill(WHITE)
+            show_image(levelupimages[i])
+            pygame.display.flip()
+
+    castlepages()
 
 
 def tutorial_introduction():
@@ -430,6 +498,38 @@ def tutorial_introduction():
             break
         
     secondgamepage()
+
+
+def mappart():
+    mappages = [
+        './imgs/menormapa.png' ,
+        './imgs/maiormapa.png'
+
+    ]
+    i = 0
+
+    while i < 1:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 714, 375, 135, 25) == 1 and i == 0:
+                        i += 1
+                    if verposicao(mousepos, 905, 289, 113, 25) == 1 and i == 1:
+                        i += 1
+
+               
+            if i == 2:
+                break
+            screen.fill(WHITE)
+            show_image(mappages[i])
+            pygame.display.flip()
+
+    main_menu()
 
 
 def first_level():
@@ -630,7 +730,7 @@ def first_level():
             
             break
 
-    second_level()
+    level_up()
 
 
 def second_level():
@@ -644,73 +744,43 @@ def second_level():
     isWing = False
     user_input = ""
     input_timer = time.time()
-    door_open = False
-    print(door_open)
-    castellanm.resetchar2()
+    abrir_mapa = 0
+    
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_d:
-                    isWing = True
-                    print('vc apertou')
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_d:
-                    isWing = False
-                    print('vc soltou')
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(isWing)
+                mousepos = pygame.mouse.get_pos()
+                print(mousepos)
+            
+                if verposicao(mousepos, 980, 65, 240, 157) == 1:
+                    print('opa')
+                    abrir_mapa = 1
 
-            if isWing == True:
-                print('w')
-                print('to apertando')
-
-                castellanm.andardireita()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    if user_input == "joule":
-                        door_open2 = True  # Porta liberada
-                        print(door_open2, "acertou")
-                        break
-                    else:
-                        user_input = ""
-                elif event.unicode.isprintable():
-                    user_input += event.unicode.lower()
-
+            
         # Resetar o input a cada 5 segundos
-        if time.time() - input_timer > 5:
-            user_input = ""
-            input_timer = time.time()
-
+        
         # Movimentação do personagem
 
         screen.fill(WHITE)
-        if castellanm.atualpos() >= 1350 and door_open2 == True:
-            audiotransition2.play(0)
-            castellanm.movetofar()
-            secondphaseimage.set_alpha(opacidadesecond)
-            screen.blit(secondphaseimage, (0, 0))
-            if opacidadesecond > 0:
-                opacidadesecond -= 1.5
-                print("ta rodando")
-                screen.set_alpha(opacidadesecond)
-                pygame.time.delay(15)
-            if opacidadesecond <= 0:
-                break
-        else:
-            show_image('./imgs/pagsix.jpg')
+       
+        show_image('./imgs/secondphaseimg.png')
 
-        screen.set_alpha(opacidadesecond)
+        
+
+        
 
        
-
-        movementocastellan.draw(screen)
-        movementocastellan.update()
         pygame.display.flip()
-
-    game_over()
+        if abrir_mapa == 1:
+            break
+    mappart()
+    
 
 
 def game_over():

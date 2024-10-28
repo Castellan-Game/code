@@ -511,3 +511,81 @@ main_menu()
 # Iniciar o jogo
 main_menu()
 
+
+def second_level():
+    global aumentando_opacidade
+    diminuindoopacidade = 0
+    opacidadesecond = 255
+    global door_open2
+    global isWing
+    global vel
+    vel = 0.5
+    isWing = False
+    user_input = ""
+    input_timer = time.time()
+    door_open = False
+    print(door_open)
+    castellanm.resetchar2()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_d:
+                    isWing = True
+                    print('vc apertou')
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_d:
+                    isWing = False
+                    print('vc soltou')
+
+            if isWing == True:
+                print('w')
+                print('to apertando')
+
+                castellanm.andardireita()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if user_input == "joule":
+                        door_open2 = True  # Porta liberada
+                        print(door_open2, "acertou")
+                        break
+                    else:
+                        user_input = ""
+                elif event.unicode.isprintable():
+                    user_input += event.unicode.lower()
+
+        # Resetar o input a cada 5 segundos
+        if time.time() - input_timer > 5:
+            user_input = ""
+            input_timer = time.time()
+
+        # Movimentação do personagem
+
+        screen.fill(WHITE)
+        if castellanm.atualpos() >= 1350 and door_open2 == True:
+            audiotransition2.play(0)
+            castellanm.movetofar()
+            secondphaseimage.set_alpha(opacidadesecond)
+            screen.blit(secondphaseimage, (0, 0))
+            if opacidadesecond > 0:
+                opacidadesecond -= 1.5
+                print("ta rodando")
+                screen.set_alpha(opacidadesecond)
+                pygame.time.delay(15)
+            if opacidadesecond <= 0:
+                break
+        else:
+            show_image('./imgs/pagsix.jpg')
+
+        screen.set_alpha(opacidadesecond)
+
+       
+
+        movementocastellan.draw(screen)
+        movementocastellan.update()
+        pygame.display.flip()
+
