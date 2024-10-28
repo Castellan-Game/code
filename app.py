@@ -231,7 +231,7 @@ def main_menu():
                     creds()
 
         screen.fill(WHITE)  # Cor de fundo
-        show_image('./imgs/menu.jpg')  # Imagem de fundo do menu
+        show_image('./imgs/menuC.jpg')  # Imagem de fundo do menu
 
         pygame.display.flip()
 
@@ -245,7 +245,7 @@ def verificar_input(texto, a):
 
 def secondgamepage():
     page2images = [
-        './imgs/pagseven.jpg',
+        './imgs/cast6.jpg',
         
     ]
 
@@ -280,16 +280,20 @@ def secondgamepage():
 
 def game_pages():
     page_images = [
-        './imgs/pagone.jpg',
-        './imgs/pagtwo.jpg',
-        './imgs/pagthree.jpg',
-        './imgs/pagfour.jpg',
-        './imgs/pagfive.jpg',
+        './imgs/firstwtext.jpg',
+        './imgs/firsttext.jpg',
+        './imgs/cast2.jpg',
+        './imgs/cast3.jpg',
+        './imgs/cast3.1.jpg',
+        './imgs/cast4.jpg',
+        './imgs/cast4.1.jpg',
+        './imgs/cast5.jpg',
+        
 
     ]
 
     i = 0
-    while i < 4:
+    while i < 8:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -308,7 +312,7 @@ def game_pages():
                         if verposicao(mousepos, 70, 650, 130, 100) == 1:
                             i -= 1
 
-            if i == 5:
+            if i == 8:
                 break
             screen.fill(WHITE)
             show_image(page_images[i])
@@ -352,7 +356,7 @@ def tutorial_introduction():
 
             
         screen.fill(WHITE)
-        show_image('./imgs/pagsix.jpg')
+        show_image('./imgs/cast9.jpg')
 
         movementocastellan.draw(screen)
         movementocastellan.update()
@@ -425,7 +429,7 @@ def first_level():
                 print(isWing)
                 mousepos = pygame.mouse.get_pos()
                 print(mousepos)
-                if verposicao(mousepos, 1080, 510, 70, 62) == 1:
+                if verposicao(mousepos, 660, 484, 67, 72) == 1:
                     openlettero = 1
                     if openlettero == 1:
                         lettersaw = 1
@@ -442,13 +446,13 @@ def first_level():
             input_timer = time.time()
 
         screen.fill(WHITE)
-        show_image('./imgs/pageight.jpg')
+        show_image('./imgs/cast7.jpg')
 
         if lettersaw == 1:
             letter_image.set_alpha(opacidade)
             screen.blit(letter_image, letter_rect)
             if opacidade < 255:
-                opacidade += 3
+                opacidade += 5
                 print("ta rodando")
 
                 pygame.time.delay(20)
@@ -459,7 +463,7 @@ def first_level():
             letter_image.set_alpha(opacidade)
             screen.blit(letter_image, letter_rect)
             if opacidade > 0:
-                opacidade -= 3
+                opacidade -= 5
                 print("ta rodando")
 
                 pygame.time.delay(20)
