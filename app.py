@@ -115,6 +115,26 @@ y_velocity = 0
 
 
 # configs das cartas / livro 
+menormapaimage = pygame.image.load('./imgs/menormapa.png')
+menormapaimage = pygame.transform.scale(menormapaimage, [1000, 750])
+
+mapamenor_rect = menormapaimage.get_rect()
+
+mapamenor_rect.x = 220
+mapamenor_rect.y = HEIGHT - 780 
+
+maiormapaimage = pygame.image.load('./imgs/maiormapa.png')
+maiormapaimage = pygame.transform.scale(maiormapaimage, [1000, 750])
+
+mapamaior_rect = maiormapaimage.get_rect()
+
+mapamaior_rect.x = 220
+mapamaior_rect.y = HEIGHT - 780 
+
+
+
+
+
 letter1_image = pygame.image.load('./imgs/carta1.png')
 letter1_image = pygame.transform.scale(letter1_image, [480, 640])
 
@@ -149,6 +169,9 @@ opacidade = 0
 aumentando_opacidade = False
 opacidade2 = 0
 opacidade3 = 0
+
+opacidadeMenorMapa = 0
+opacidadeMaiorMapa = 0
 # andar
 isWing = False
 
@@ -421,7 +444,7 @@ def castlepages():
     second_level()
 
 
-def level_up():
+def level_up(proxfase):
     levelupimages = [
         './imgs/levelup.png'
         
@@ -448,7 +471,7 @@ def level_up():
             show_image(levelupimages[i])
             pygame.display.flip()
 
-    castlepages()
+    proxfase()
 
 
 def tutorial_introduction():
@@ -655,7 +678,7 @@ def first_level():
             letter1_image.set_alpha(opacidade)
             screen.blit(letter1_image, letter_rect)
             if opacidade > 0:
-                opacidade -= 8
+                opacidade -= 15
                 print("ta rodando")
 
                 pygame.time.delay(15)
@@ -671,7 +694,7 @@ def first_level():
             letter2_image.set_alpha(opacidade2)
             screen.blit(letter2_image, letter2_rect)
             if opacidade2 < 255:
-                opacidade2 += 8
+                opacidade2 += 5
                 print("ta rodando")
             
                 pygame.time.delay(15)
@@ -682,7 +705,7 @@ def first_level():
             letter2_image.set_alpha(opacidade2)
             screen.blit(letter2_image, letter2_rect)
             if opacidade2 > 0:
-                opacidade2 -= 8
+                opacidade2 -= 15
                 print("ta rodando")
 
                 pygame.time.delay(15)
@@ -697,7 +720,7 @@ def first_level():
             letter3_image.set_alpha(opacidade3)
             screen.blit(letter3_image, letter3_rect)
             if opacidade3 < 255:
-                opacidade3 += 8
+                opacidade3 += 5
                 print("ta rodando")
             
                 pygame.time.delay(15)
@@ -708,7 +731,7 @@ def first_level():
             letter3_image.set_alpha(opacidade3)
             screen.blit(letter3_image, letter3_rect)
             if opacidade3 > 0:
-                opacidade3 -= 8
+                opacidade3 -= 15
                 print("ta rodando")
 
                 pygame.time.delay(15)
@@ -730,7 +753,7 @@ def first_level():
             
             break
 
-    level_up()
+    level_up(castlepages)
 
 
 def second_level():
@@ -740,6 +763,10 @@ def second_level():
     global door_open2
     global isWing
     global vel
+    mapasaw = 0
+    mapa2saw = 0
+    opacidadeMenorMapa = 0
+    opacidadeMaiorMapa = 0
     vel = 0.5
     isWing = False
     user_input = ""
@@ -757,10 +784,41 @@ def second_level():
                 print(isWing)
                 mousepos = pygame.mouse.get_pos()
                 print(mousepos)
+                print(mapasaw, mapa2saw)
             
-                if verposicao(mousepos, 980, 65, 240, 157) == 1:
-                    print('opa')
+                if verposicao(mousepos, 980, 65, 240, 157) == 1 and mapasaw == 0 :
+                    print('abrindo')
                     abrir_mapa = 1
+
+                if verposicao(mousepos, 980, 65, 240, 157) == 1 and mapasaw == 3 :
+                    print('abrindo')
+                    abrir_mapa = 2    
+                    
+                if abrir_mapa == 1:
+                    mapasaw = 1
+                    abrir_mapa = 0
+
+                if abrir_mapa == 2:
+                    mapa2saw = 1 
+                    abrir_mapa = 0  
+
+                if mapasaw == 1:    
+                    if verposicao(mousepos, 716, 381, 93, 20) == 1 and opacidadeMenorMapa > 150:
+                        mapasaw = 3
+                        print(mapasaw , mapa2saw)
+                    if verposicao(mousepos, 1153, 45, 55, 50) == 1:
+                        mapasaw = 2
+                        
+                        
+
+                if mapa2saw == 1:
+                    
+                    if verposicao(mousepos, 847, 293, 87, 25) == 1 and opacidadeMaiorMapa>150:
+                        mapa2saw = 3
+                    if verposicao(mousepos, 1153, 45, 55, 50) == 1:
+                        mapa2saw = 2
+                        print('clicou')
+                        
 
             
         # Resetar o input a cada 5 segundos
@@ -771,15 +829,90 @@ def second_level():
        
         show_image('./imgs/secondphaseimg.png')
 
+
+
+        if mapasaw == 1:
+            menormapaimage.set_alpha(opacidadeMenorMapa)
+            screen.blit(menormapaimage, mapamenor_rect)
+            if opacidadeMenorMapa < 255:
+                opacidadeMenorMapa += 5
+                print("ta rodando")
+                print(opacidadeMenorMapa)
+                pygame.time.delay(15)
+
+        menormapaimage.set_alpha(opacidadeMenorMapa)
+
+        if mapasaw == 2:
+            menormapaimage.set_alpha(opacidadeMenorMapa)
+            screen.blit(menormapaimage, mapamenor_rect)
+            if opacidadeMenorMapa > 0:
+                opacidadeMenorMapa -= 5
+                print("ta rodando")
+
+                pygame.time.delay(15)
+            if opacidadeMenorMapa == 0:
+                mapasaw = 0
         
+
+        menormapaimage.set_alpha(opacidadeMenorMapa)
+
+
+
+        if mapa2saw == 1:
+            maiormapaimage.set_alpha(opacidadeMaiorMapa)
+            screen.blit(maiormapaimage, mapamaior_rect)
+            if opacidadeMaiorMapa < 255:
+                opacidadeMaiorMapa += 5
+                print("ta rodando")
+            
+                pygame.time.delay(15)
+
+        maiormapaimage.set_alpha(opacidadeMaiorMapa)
+
+        if mapa2saw == 2:
+            maiormapaimage.set_alpha(opacidadeMaiorMapa)
+            screen.blit(maiormapaimage, mapamaior_rect)
+            if opacidadeMaiorMapa > 0:
+                opacidadeMaiorMapa -= 5
+                print("ta rodando")
+                
+                pygame.time.delay(15)
+            if opacidadeMaiorMapa == 0:
+                mapa2saw = 0
+
+        maiormapaimage.set_alpha(opacidadeMaiorMapa)
+
+        if mapasaw == 3:
+            menormapaimage.set_alpha(opacidadeMenorMapa)
+            screen.blit(menormapaimage, mapamenor_rect)
+            if opacidadeMenorMapa > 0:
+                opacidadeMenorMapa -= 5
+                print("ta rodando")
+
+                pygame.time.delay(15)
+            if opacidadeMenorMapa == 0:
+                mapasaw = 3
+
+        menormapaimage.set_alpha(opacidadeMenorMapa)
+
+        if mapa2saw == 3:
+            maiormapaimage.set_alpha(opacidadeMaiorMapa)
+            screen.blit(maiormapaimage, mapamaior_rect)
+            if opacidadeMaiorMapa > 0:
+                opacidadeMaiorMapa -= 5
+                print("ta rodando")
+                
+                pygame.time.delay(15)
+            if opacidadeMaiorMapa == 0:
+                mapa2saw = 3
+                level_up()
 
         
 
        
         pygame.display.flip()
-        if abrir_mapa == 1:
-            break
-    mappart()
+        
+    
     
 
 
