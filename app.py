@@ -1,3 +1,11 @@
+import os, sys
+dirpath = os.getcwd()
+sys.path.append(dirpath)
+if getattr(sys, "frozen", False):
+    os.chdir(sys._MEIPASS)
+###
+
+
 import pygame
 import sys
 import random
@@ -25,9 +33,15 @@ vel = 1
 vezes = 0
 abertura = 0
 #music
-pygame.mixer.music.load("./audio/intro.mp3")
+pygame.mixer.music.load("./imgs/intro.mp3")
 pygame.mixer.music.set_volume(0.08)
 pygame.mixer.music.play(-1)
+
+levelsound = pygame.mixer.Sound('./imgs/levelupsound.mp3')
+levelsound.set_volume(0.4)
+
+menubtnsound = pygame.mixer.Sound('./imgs/menubtnsound.mp3')
+menubtnsound.set_volume(0.1)
 
 class CastellanMove(pygame.sprite.Sprite):
     def __init__(self):
@@ -300,6 +314,7 @@ def main_menu():
                 print(mousepos)
                 if verposicao(mousepos, 575, 450, 300, 100) == 1:
                     vezes = vezes + 1
+                    menubtnsound.play(0)
                     game_pages()
                     
                 elif verposicao(mousepos, 73, 626, 130, 100) == 1:
@@ -346,6 +361,7 @@ def secondgamepage():
     ]
 
     i = 0
+    
     while i < 1:
         while True:
             for event in pygame.event.get():
@@ -568,6 +584,7 @@ def level_up2():
     ]
 
     i = 0
+    levelsound.play(0)
     while i < 1:
         while True:
             for event in pygame.event.get():
@@ -597,6 +614,7 @@ def level_up():
     ]
 
     i = 0
+    levelsound.play(0)
     while i < 1:
         while True:
             for event in pygame.event.get():
