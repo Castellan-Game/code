@@ -371,6 +371,69 @@ def secondgamepage():
     first_level()
 
 
+def thirdphase2_pages():
+    page_images = [
+        './imgs/30.png',
+       
+        
+
+    ]
+
+    i = 0
+    while i < 1:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
+                        i += 1
+
+                
+
+            if i == 1:
+                break
+            screen.fill(WHITE)
+            show_image(page_images[i])
+            pygame.display.flip()
+
+    espacial_walking()
+
+def final_pages():
+    page_images = [
+        './imgs/32.png',
+        './imgs/continuepage.png'
+       
+        
+
+    ]
+
+    i = 0
+    while i < 2:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
+                        i += 1
+
+                
+
+            if i == 2:
+                break
+            screen.fill(WHITE)
+            show_image(page_images[i])
+            pygame.display.flip()
+
+    main_menu()
+
 def thirdphase_pages():
     page_images = [
         './imgs/25.png',
@@ -541,6 +604,55 @@ def level_up():
 
     second_level()
 
+
+def espacial_walking():
+    castellanm.resetcharTuto()
+    global vel
+    vel = 1.3
+    global isWing
+    isWing = False
+    global aumentando_opacidade
+    global opacidade
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == K_d:
+                    isWing = True
+                    print('vc apertou')
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_d:
+                    isWing = False
+                    print('vc soltou')
+
+            if isWing == True:
+                print('w')
+                print('to apertando')
+
+                castellanm.andardireita()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mousepos = pygame.mouse.get_pos()
+                print(mousepos)
+
+            
+        screen.fill(WHITE)
+        show_image('./imgs/31.png')
+
+        movementocastellan.draw(screen)
+        movementocastellan.update()
+        pygame.display.flip()
+
+        pygame.time.delay(30)
+        if castellanm.atualpos() >= 1250:
+
+            break
+        
+    final_pages()
 
 def tutorial_introduction():
     castellanm.resetcharTuto()
@@ -1095,7 +1207,7 @@ def third_level():
        
         pygame.display.flip()
 
-    level_up()
+    thirdphase2_pages()
 
     
     
