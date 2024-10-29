@@ -18,29 +18,25 @@ body{
     color: white;
     overflow-x: hidden;
     flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 nav{
     width: 100%;
     height: 60px;
-    padding: 10px 0;
+    padding: 10px;
     font-size: 17px;
 }
 
 nav ul{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 10px;
-}
-
-@media only screen and (max-width: 500px){
-    nav ul{
-        flex-direction: column;
-    }
+    gap: 10px;
 }
 
 nav li{
@@ -50,20 +46,20 @@ nav li{
     padding-top: 10px;
 }
 
-nav a{
-    text-decoration: none;
-    color: inherit;
-    font: inherit;
-}
-
 #logo{
     display: inline;
     margin-bottom: 10px;
 }
 
+a{
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+}
+
 .parallaxlogo{
     width: 100vw;
-    height: 40vh;
+    height: 400px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -75,14 +71,15 @@ nav a{
     position: relative;
     width: 100%;
     max-width: 400px;
+    flex: 1;
 }
 
 .jogar{
     font-family: 'minhafonte', sans-serif;
     position: absolute;
-    top: 70%;
-    left: 176%;
-    transform: translate(-40%, -50%);
+    top: 67%;
+    left: 175%;
+    transform: translate(-60%, -60%);
     -ms-transform: translate(-50%, -50%);
     background-color: #447274;
     color: black;
@@ -100,63 +97,55 @@ nav a{
     color: white;
 }
 
-.containerimg header{
-    font-size: 16px;
-    text-align: center;
-}
-
-.containerimg{
+.personagens{
     display: flex;
-    float: left;
-    flex-wrap: wrap;
-    width: 100%;
-    height: auto;
-    padding: 30px;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
 }
 
-.imagem1{
-    margin: 10px 0;
-    float: left;
+div.gallery{
     border: 1px solid #ccc;
 }
-
-div.gallery {
-    border: 1px solid #ccc;
-}
-
-div.gallery:hover {
+  
+div.gallery:hover{
     border: 10px solid #27301b;
 }
-
-div.gallery img {
+  
+div.gallery img{
     width: 100%;
     height: auto;
-    margin: 10px 0;
 }
-
-.responsive {
+  
+div.desc{
+    padding: 15px;
+    text-align: center;
+}
+  
+*{
+    box-sizing: border-box;
+}
+  
+.responsive{
     padding: 0 6px;
     float: left;
-    width: 50.99999%;
-    height: 50.99999%;
-    margin-top: 10px;
+    width: 24.99999%;
 }
-
-@media only screen and (max-width: 1200px) {
+  
+@media only screen and (max-width: 700px){
     .responsive {
-        width: 49%;
-        margin: 6px 0;
+      width: 49.99999%;
+      margin: 6px 0;
     }
 }
-
-@media only screen and (max-width: 768px) {
+  
+@media only screen and (max-width: 500px){
     .responsive {
-        width: 100%;
+      width: 100%;
     }
 }
-
-.clearfix::after {
+  
+.clearfix:after{
     content: "";
     display: table;
     clear: both;
@@ -170,7 +159,6 @@ div.gallery img {
     text-align: center;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     align-items: center;
 }
 
