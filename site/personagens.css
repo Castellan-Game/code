@@ -57,9 +57,9 @@ a{
     font: inherit;
 }
 
-.parallaxlogo{
+#parallaxlogo{
     width: 100vw;
-    height: 400px;
+
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -70,7 +70,7 @@ a{
 .container{
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 1920px;
     flex: 1;
 }
 
@@ -78,7 +78,7 @@ a{
     font-family: 'minhafonte', sans-serif;
     position: absolute;
     top: 67%;
-    left: 175%;
+    left: 50%;
     transform: translate(-60%, -60%);
     -ms-transform: translate(-50%, -50%);
     background-color: #447274;
