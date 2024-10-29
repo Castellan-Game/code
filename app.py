@@ -132,7 +132,13 @@ mapamaior_rect.x = 220
 mapamaior_rect.y = HEIGHT - 780 
 
 
+minerioimg = pygame.image.load('./imgs/mineriomap.png') 
+minerioimg = pygame.transform.scale(minerioimg, [1000, 750])
 
+minerioimg_rect = minerioimg.get_rect()
+
+minerioimg_rect.x = 220
+minerioimg_rect.y = HEIGHT - 780
 
 
 letter1_image = pygame.image.load('./imgs/carta1.png')
@@ -365,6 +371,37 @@ def secondgamepage():
     first_level()
 
 
+def thirdphase_pages():
+    page_images = [
+        './imgs/25.png',
+       
+        
+
+    ]
+
+    i = 0
+    while i < 1:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
+                        i += 1
+
+                
+
+            if i == 1:
+                break
+            screen.fill(WHITE)
+            show_image(page_images[i])
+            pygame.display.flip()
+
+    third_level()
+
 def game_pages():
     page_images = [
         './imgs/cast1.png',
@@ -446,7 +483,36 @@ def castlepages():
     second_level()
 
 
-def level_up(proxfase):
+def level_up2():
+    levelup2images = [
+        './imgs/level_up2.png'
+        
+
+    ]
+
+    i = 0
+    while i < 1:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousepos = pygame.mouse.get_pos()
+                    print(mousepos)
+                    if verposicao(mousepos, 836, 257, 323, 320) == 1:
+                        i += 1
+
+               
+            if i == 1:
+                break
+            screen.fill(WHITE)
+            show_image(levelup2images[i])
+            pygame.display.flip()
+
+    thirdphase_pages()
+
+def level_up():
     levelupimages = [
         './imgs/levelup.png'
         
@@ -473,7 +539,7 @@ def level_up(proxfase):
             show_image(levelupimages[i])
             pygame.display.flip()
 
-    proxfase()
+    second_level()
 
 
 def tutorial_introduction():
@@ -518,7 +584,7 @@ def tutorial_introduction():
         pygame.display.flip()
 
         pygame.time.delay(30)
-        if castellanm.atualpos() >= 1000:
+        if castellanm.atualpos() >= 930:
 
             break
         
@@ -755,7 +821,7 @@ def first_level():
             
             break
 
-    level_up(castlepages)
+    level_up()
 
 
 def second_level():
@@ -837,10 +903,10 @@ def second_level():
             menormapaimage.set_alpha(opacidadeMenorMapa)
             screen.blit(menormapaimage, mapamenor_rect)
             if opacidadeMenorMapa < 255:
-                opacidadeMenorMapa += 5
+                opacidadeMenorMapa += 7.5
                 print("ta rodando")
                 print(opacidadeMenorMapa)
-                pygame.time.delay(15)
+                pygame.time.delay(2)
 
         menormapaimage.set_alpha(opacidadeMenorMapa)
 
@@ -848,10 +914,10 @@ def second_level():
             menormapaimage.set_alpha(opacidadeMenorMapa)
             screen.blit(menormapaimage, mapamenor_rect)
             if opacidadeMenorMapa > 0:
-                opacidadeMenorMapa -= 5
+                opacidadeMenorMapa -= 15
                 print("ta rodando")
 
-                pygame.time.delay(15)
+                pygame.time.delay(4)
             if opacidadeMenorMapa == 0:
                 mapasaw = 0
         
@@ -864,10 +930,10 @@ def second_level():
             maiormapaimage.set_alpha(opacidadeMaiorMapa)
             screen.blit(maiormapaimage, mapamaior_rect)
             if opacidadeMaiorMapa < 255:
-                opacidadeMaiorMapa += 5
+                opacidadeMaiorMapa += 7.5
                 print("ta rodando")
             
-                pygame.time.delay(4)
+                pygame.time.delay(2)
 
         maiormapaimage.set_alpha(opacidadeMaiorMapa)
 
@@ -875,7 +941,7 @@ def second_level():
             maiormapaimage.set_alpha(opacidadeMaiorMapa)
             screen.blit(maiormapaimage, mapamaior_rect)
             if opacidadeMaiorMapa > 0:
-                opacidadeMaiorMapa -= 5
+                opacidadeMaiorMapa -= 15
                 print("ta rodando")
                 
                 pygame.time.delay(4)
@@ -888,7 +954,7 @@ def second_level():
             menormapaimage.set_alpha(opacidadeMenorMapa)
             screen.blit(menormapaimage, mapamenor_rect)
             if opacidadeMenorMapa > 0:
-                opacidadeMenorMapa -= 5
+                opacidadeMenorMapa -= 15
                 print("ta rodando")
 
                 pygame.time.delay(4)
@@ -901,19 +967,136 @@ def second_level():
             maiormapaimage.set_alpha(opacidadeMaiorMapa)
             screen.blit(maiormapaimage, mapamaior_rect)
             if opacidadeMaiorMapa > 0:
-                opacidadeMaiorMapa -= 5
+                opacidadeMaiorMapa -= 15
                 print("ta rodando")
                 
                 pygame.time.delay(4)
             if opacidadeMaiorMapa == 0:
                 mapa2saw = 3
-                level_up()
+                level_up2()
 
         
 
        
         pygame.display.flip()
         
+    
+def third_level():
+    global aumentando_opacidade
+    diminuindoopacidade = 0
+    opacidadesecond = 255
+    global door_open2
+    global isWing
+    global vel
+    mineriosaw = 0
+    
+    opacidadeMinerioMapa = 0
+    opacidadeMaiorMapa = 0
+    vel = 0.5
+    isWing = False
+    user_input = ""
+    input_timer = time.time()
+    abrir_minerio = 0
+    
+    
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(isWing)
+                mousepos = pygame.mouse.get_pos()
+                print(mousepos)
+                print(mineriosaw)
+            
+                if verposicao(mousepos, 856, 605, 67, 60) == 1 and mineriosaw == 0 :
+                    print('abrindo')
+                    abrir_minerio = 1
+
+                if verposicao(mousepos, 980, 65, 240, 157) == 1 and mineriosaw == 3 :
+                    print('abrindo')
+                    abrir_minerio = 2    
+                    
+                if abrir_minerio == 1:
+                    mineriosaw = 1
+                    abrir_minerio = 0
+
+                if abrir_minerio == 2:
+                     
+                    abrir_minerio = 0
+
+                if mineriosaw == 1:    
+                    if verposicao(mousepos, 833, 426, 136, 71) == 1 and opacidadeMinerioMapa > 150:
+                        mineriosaw = 3
+                        print(mineriosaw)
+                    if verposicao(mousepos, 1153, 45, 55, 50) == 1:
+                        mineriosaw = 2
+                        
+                        
+
+                
+
+            
+        # Resetar o input a cada 5 segundos
+        
+        # Movimentação do personagem
+
+        screen.fill(WHITE)
+       
+        show_image('./imgs/26.png')
+
+
+
+        if mineriosaw == 1:
+            minerioimg.set_alpha(opacidadeMinerioMapa)
+            screen.blit(minerioimg, minerioimg_rect)
+            if opacidadeMinerioMapa < 255:
+                opacidadeMinerioMapa += 7.5
+                print("ta rodando")
+                print(opacidadeMenorMapa)
+                pygame.time.delay(2)
+
+        minerioimg.set_alpha(opacidadeMinerioMapa)
+
+        if mineriosaw == 2:
+            minerioimg.set_alpha(opacidadeMinerioMapa)
+            screen.blit(minerioimg, minerioimg_rect)
+            if opacidadeMinerioMapa > 0:
+                opacidadeMinerioMapa -= 15
+                print("ta rodando")
+
+                pygame.time.delay(4)
+            if opacidadeMinerioMapa == 0:
+                mineriosaw = 0
+        
+
+        minerioimg.set_alpha(opacidadeMinerioMapa)
+
+
+
+       
+
+       
+
+        if mineriosaw == 3:
+            minerioimg.set_alpha(opacidadeMinerioMapa)
+            screen.blit(minerioimg, minerioimg_rect)
+            if opacidadeMinerioMapa > 0:
+                opacidadeMinerioMapa -= 15
+                print("ta rodando")
+                
+                pygame.time.delay(4)
+            if opacidadeMinerioMapa == 0:
+                break
+                
+
+       
+        pygame.display.flip()
+
+    level_up()
+
     
     
 
@@ -933,6 +1116,25 @@ def game_over():
         draw_text("Pressione R para Reiniciar", 36, (0, 0, 0),
                   screen, WIDTH // 2 - 150, HEIGHT // 2)
         pygame.display.flip()
+    
+
+
+def game_over():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:  # Reinicia o jogo
+                    main_menu()
+        screen.fill(WHITE)
+        draw_text("Game Over!", 64, (255, 0, 0), screen,
+                  WIDTH // 2 - 150, HEIGHT // 2 - 100)
+        draw_text("Pressione R para Reiniciar", 36, (0, 0, 0),
+                  screen, WIDTH // 2 - 150, HEIGHT // 2)
+        pygame.display.flip()
+    
 
 
 main_menu()
