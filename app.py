@@ -23,6 +23,7 @@ DOOR_COLOR = (0, 255, 0)  # Cor da porta (verde)
 vel = 1
 
 vezes = 0
+abertura = 0
 #music
 pygame.mixer.music.load("./audio/intro.mp3")
 pygame.mixer.music.set_volume(0.08)
@@ -249,6 +250,7 @@ def show_image(image_path):
 
 def creds():
     global vezes
+    
     vezes = vezes + 1
     while True:
 
@@ -273,10 +275,11 @@ def creds():
 def main_menu():
     opacidademenu = 0
     global vezes
+    global abertura
 
-
-    if vezes == 0:
+    if abertura == 0:
         pygame.time.delay(800)
+        abertura = 1
     while True:
 
         
@@ -373,8 +376,11 @@ def secondgamepage():
 
 def thirdphase2_pages():
     page_images = [
+        './imgs/27.png',
+        './imgs/28.png',
+        './imgs/29.png',
         './imgs/30.png',
-       
+        
         
 
     ]
@@ -389,12 +395,18 @@ def thirdphase2_pages():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mousepos = pygame.mouse.get_pos()
                     print(mousepos)
-                    if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
-                        i += 1
+
+                    if i == 0:
+                        if verposicao(mousepos, 585, 610, 119, 102) == 1:
+                            i += 1
+                    else:
+                        if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
+                            i += 1
+
 
                 
 
-            if i == 1:
+            if i == 4:
                 break
             screen.fill(WHITE)
             show_image(page_images[i])
@@ -403,6 +415,7 @@ def thirdphase2_pages():
     espacial_walking()
 
 def final_pages():
+    global vezes
     page_images = [
         './imgs/32.png',
         './imgs/continuepage.png'
@@ -427,6 +440,7 @@ def final_pages():
                 
 
             if i == 2:
+                vezes = 0
                 break
             screen.fill(WHITE)
             show_image(page_images[i])
@@ -649,14 +663,15 @@ def espacial_walking():
 
         pygame.time.delay(30)
         if castellanm.atualpos() >= 1250:
-
+            vel = 1.2
             break
         
     final_pages()
 
 def tutorial_introduction():
     castellanm.resetcharTuto()
-
+    global vel
+    vel = 1.2
     global isWing
     isWing = False
     global aumentando_opacidade
