@@ -822,7 +822,7 @@ def first_level():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(isWing)
                 mousepos = pygame.mouse.get_pos()
-                print(mousepos)
+                print(mousepos,letter3saw)
                 if verposicao(mousepos, 1141, 204, 80, 55) == 1:
                     openlettero = 1
                     if openlettero == 1:
@@ -839,16 +839,19 @@ def first_level():
                     letter3saw = 0
                     if verposicao(mousepos, 923, 105, 32, 28) == 1 and opacidade2>150:
                         letter2saw = 2
+
                     if verposicao(mousepos, 584, 473, 310, 59) == 1:
                         letter2saw = 2
                         
                         letter3saw = 1
+                        
 
                 if letter3saw == 1:
                     if verposicao(mousepos, 923, 105, 32, 28) == 1:
                         letter3saw = 2
                     if verposicao(mousepos, 584, 272, 310, 59) == 1:
                         door_open = True
+                        
                    
                     
                         
@@ -955,7 +958,9 @@ def first_level():
 
         pygame.time.delay(30)
         if door_open == True:
-            
+            letter3saw = 0
+            opacidade3 = 0
+            door_open = False
             break
 
     level_up()
