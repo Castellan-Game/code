@@ -1,11 +1,3 @@
-import os, sys
-dirpath = os.getcwd()
-sys.path.append(dirpath)
-if getattr(sys, "frozen", False):
-    os.chdir(sys._MEIPASS)
-###
-
-
 import pygame
 import sys
 import random
@@ -13,7 +5,7 @@ import time
 from pygame.locals import *
 
 
-from pygame.sprite import Group
+
 
 # Inicialização do Pygame
 pygame.init()
