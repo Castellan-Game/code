@@ -443,8 +443,14 @@ def final_pages():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mousepos = pygame.mouse.get_pos()
                     print(mousepos)
-                    if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
-                        i += 1
+
+                    if i == 0:
+                        if verposicao(mousepos, 0, 0, WIDTH, HEIGHT) == 1:
+                            i += 1
+                    if i == 1:
+                        if verposicao(mousepos, 133, 692, 351, 34) == 1:
+                            i += 1
+
 
                 
 
