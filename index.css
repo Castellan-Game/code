@@ -6,7 +6,7 @@
 
 @font-face{
     font-family: 'minhafonte';
-    src: url('fonts/minhafonte.ttf') format('truetype');
+    src: url('./site/fonts/minhafonte.ttf') format('truetype');
 }
 
 body{
