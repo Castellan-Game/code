@@ -107,6 +107,24 @@ nav a{
     color: white;
 }
 
+.manual{
+    font-family: 'minhafonte', sans-serif;
+    position: absolute;
+    top: 67%;
+    left: 50%;
+    transform: translate(-60%, -60%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #447274;
+    color: black;
+    font-size: 18px;
+    padding: 20px 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+
 .containerimg header{
     font-size: 16px;
     text-align: center;
