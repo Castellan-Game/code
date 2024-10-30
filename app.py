@@ -387,7 +387,8 @@ def thirdphase2_pages():
         './imgs/27.png',
         './imgs/28.png',
         './imgs/29.png',
-        './imgs/30.png',
+        './imgs/audrey1.png',
+        './imgs/audrey2.png',
         
         
 
@@ -414,7 +415,7 @@ def thirdphase2_pages():
 
                 
 
-            if i == 4:
+            if i == 5:
                 break
             screen.fill(WHITE)
             show_image(page_images[i])
@@ -425,8 +426,8 @@ def thirdphase2_pages():
 def final_pages():
     global vezes
     page_images = [
-        './imgs/32.png',
-        './imgs/continuepage.png'
+        './imgs/familia.png',
+        './imgs/gameover.png'
        
         
 
@@ -1284,5 +1285,3 @@ main_menu()
 # Iniciar o jogo
 main_menu()
 
-
-# fase final em desenvolvimento
